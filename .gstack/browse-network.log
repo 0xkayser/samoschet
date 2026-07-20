@@ -1,0 +1,8 @@
+[2026-07-20T08:08:14.784Z] GET https://0xkayser.github.io/samoschet/app.html → pending (?ms, ?B)
+[2026-07-20T08:08:17.144Z] GET https://0xkayser.github.io/samoschet/ → 200 (268ms, 4692B)
+[2026-07-20T08:31:49.089Z] GET file:///Users/jopajopish/Desktop/samoschet/baza/index.html → pending (?ms, ?B)
+[2026-07-20T08:31:49.447Z] GET file:///Users/jopajopish/Desktop/samoschet/npd/repetitor/index.html → 200 (1ms, 8077B)
+[2026-07-20T08:31:49.629Z] GET file:///Users/jopajopish/Desktop/samoschet/nalog/50000/index.html → 200 (2ms, 7232B)
+[2026-07-20T08:31:49.797Z] GET file:///Users/jopajopish/Desktop/samoschet/vopros/perevod-ot-druga/index.html → 200 (1ms, 7290B)
+[2026-07-20T08:31:49.980Z] GET file:///Users/jopajopish/Desktop/samoschet/vypiska/tbank/index.html → 200 (2ms, 7424B)
+[2026-07-20T08:31:56.556Z] GET file:///Users/jopajopish/Desktop/samoschet/nalog/50000/index.html → 200 (1ms, 7232B)
