@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Самосчёт — ИИ-бухгалтерия для самозанятых</title>
+<meta name="description" content="Загрузите выписку из банка — получите налог НПД, категории трат и готовый отчёт за 30 секунд. Бесплатно, без регистрации, данные не покидают браузер.">
+<style>
+:root{
+  --bg:#0f1115; --card:#181b22; --card2:#1e222b; --border:#2a2f3a;
+  --text:#e8eaf0; --muted:#9aa3b2; --accent:#4f8cff; --accent2:#3a6fd8;
+  --green:#3ddc84; --yellow:#ffd166;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header{padding:18px 0;border-bottom:1px solid var(--border)}
+header .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:20px;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+nav a:hover{color:var(--text)}
+.hero{padding:80px 0 60px;text-align:center}
+.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.15;font-weight:800;max-width:800px;margin:0 auto 18px}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero p{color:var(--muted);font-size:18px;max-width:620px;margin:0 auto 32px}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:15px 34px;border-radius:12px;transition:.15s}
+.cta:hover{background:var(--accent2);transform:translateY(-1px)}
+.cta.ghost{background:transparent;border:1px solid var(--border);color:var(--text);margin-left:12px}
+.cta.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.trust{color:var(--muted);font-size:13px;margin-top:18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:50px 0}
+.step{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px}
+.step .n{width:34px;height:34px;border-radius:50%;background:rgba(79,140,255,.15);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px}
+.step h3{font-size:17px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:14px}
+.section{padding:60px 0}
+.section h2{font-size:clamp(24px,3.5vw,32px);text-align:center;margin-bottom:14px}
+.section .lead{color:var(--muted);text-align:center;max-width:640px;margin:0 auto 40px;font-size:16px}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.f{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.f .ico{font-size:26px;margin-bottom:10px}
+.f h3{font-size:16px;margin-bottom:6px}
+.f p{color:var(--muted);font-size:14px}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;align-items:stretch}
+.price{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px;display:flex;flex-direction:column}
+.price.hot{border-color:var(--accent);position:relative}
+.price.hot::before{content:"популярно";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:12px}
+.price h3{font-size:17px}
+.price .p{font-size:34px;font-weight:800;margin:10px 0 2px}
+.price .per{color:var(--muted);font-size:13px;margin-bottom:18px}
+.price ul{list-style:none;margin-bottom:24px;flex:1}
+.price li{color:var(--muted);font-size:14px;padding:5px 0 5px 24px;position:relative}
+.price li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.price .cta{text-align:center;font-size:15px;padding:12px 20px;margin-left:0}
+.faq{max-width:720px;margin:0 auto}
+details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;font-size:15px}
+details p{color:var(--muted);font-size:14px;margin-top:10px}
+footer{border-top:1px solid var(--border);padding:30px 0;color:var(--muted);font-size:13px;text-align:center}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:560px){.cta.ghost{margin-left:0;margin-top:10px}nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Само<span>счёт</span></a>
+    <nav>
+      <a href="#how">Как работает</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#faq">Вопросы</a>
+      <a href="app.html">Открыть инструмент</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Выписка из банка → налог и отчёт <em>за 30 секунд</em></h1>
+    <p>ИИ-бухгалтерия для самозанятых. Загрузите CSV-выписку — Самосчёт отделит доход от личных переводов, посчитает налог НПД с вычетом и соберёт отчёт по месяцам.</p>
+    <a class="cta" href="app.html">Попробовать бесплатно</a>
+    <a class="cta ghost" href="app.html#demo">Посмотреть на примере</a>
+    <div class="trust">Без регистрации · Файл не загружается на сервер — всё считается в вашем браузере</div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="steps" id="how">
+    <div class="step"><div class="n">1</div><h3>Загрузите выписку</h3><p>CSV из Т-Банка, Сбера или любого банка. Или просто вставьте строки текстом.</p></div>
+    <div class="step"><div class="n">2</div><h3>Проверьте разметку</h3><p>Алгоритм + ИИ отделяют доход от личных переводов и раскладывают траты по категориям. Спорное помечается — исправляется в один клик.</p></div>
+    <div class="step"><div class="n">3</div><h3>Получите отчёт</h3><p>Налог НПД по месяцам с учётом вычета 10 000 ₽, контроль лимита 2,4 млн, экспорт в CSV и PDF.</p></div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Что умеет Самосчёт</h2>
+    <p class="lead">Всё, что самозанятый обычно делает руками в табличке — автоматически.</p>
+    <div class="feat">
+      <div class="f"><div class="ico">🧾</div><h3>Доход ≠ все поступления</h3><p>Кэшбэк, возвраты, переводы от друзей и проценты по вкладу не облагаются НПД. Самосчёт их отфильтрует, чтобы вы не переплачивали налог.</p></div>
+      <div class="f"><div class="ico">⚖️</div><h3>4% и 6% — правильно</h3><p>Ставка зависит от того, кто платил: физлицо или компания. Плюс автоматический учёт налогового вычета 10 000 ₽.</p></div>
+      <div class="f"><div class="ico">🚨</div><h3>Контроль лимита 2,4 млн</h3><p>Предупредим заранее, когда доход приблизится к годовому лимиту самозанятого.</p></div>
+      <div class="f"><div class="ico">📊</div><h3>Траты по категориям</h3><p>Такси, подписки, маркетплейсы, аренда — видно, куда уходят деньги, без ручного ввода.</p></div>
+      <div class="f"><div class="ico">🔒</div><h3>Приватность по умолчанию</h3><p>Выписка не покидает ваш компьютер. Нет сервера — нет утечек. Код страницы открыт: можно проверить.</p></div>
+      <div class="f"><div class="ico">🤖</div><h3>ИИ для спорных операций</h3><p>Непонятные назначения платежей доразмечает нейросеть Claude — по вашему ключу, напрямую, без посредников.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="wrap">
+    <h2>Тарифы</h2>
+    <p class="lead">Инструмент бесплатный. Платите, только если хотите, чтобы всё делали за вас.</p>
+    <div class="pricing">
+      <div class="price">
+        <h3>Сам</h3>
+        <div class="p">0 ₽</div>
+        <div class="per">навсегда</div>
+        <ul>
+          <li>Разбор выписки без ограничений</li>
+          <li>Налог НПД с вычетом</li>
+          <li>Отчёт CSV и печать в PDF</li>
+          <li>ИИ-разметка по своему ключу</li>
+        </ul>
+        <a class="cta" href="app.html">Открыть инструмент</a>
+      </div>
+      <div class="price hot">
+        <h3>Под ключ</h3>
+        <div class="p">1 990 ₽</div>
+        <div class="per">в месяц</div>
+        <ul>
+          <li>Присылаете выписку раз в месяц — получаете готовый отчёт</li>
+          <li>Напоминания об уплате налога до 28 числа</li>
+          <li>Проверка чеков в «Мой налог»</li>
+          <li>Ответы на вопросы по НПД в чате</li>
+        </ul>
+        <a class="cta" href="mailto:ilyabargmgmt@gmail.com?subject=Самосчёт: тариф Под ключ">Написать</a>
+      </div>
+      <div class="price">
+        <h3>Разовый разбор</h3>
+        <div class="p">2 990 ₽</div>
+        <div class="per">за год выписок</div>
+        <ul>
+          <li>Разберём год операций до чистого отчёта</li>
+          <li>Найдём переплаты по налогу</li>
+          <li>Сверка с «Мой налог»</li>
+          <li>Рекомендации на следующий год</li>
+        </ul>
+        <a class="cta ghost" style="margin-left:0;text-align:center" href="mailto:ilyabargmgmt@gmail.com?subject=Самосчёт: разовый разбор">Заказать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <h2>Вопросы</h2>
+    <div class="faq" style="margin-top:30px">
+      <details>
+        <summary>Куда загружается моя выписка?</summary>
+        <p>Никуда. Файл обрабатывается JavaScript-кодом прямо на странице, в вашем браузере. У Самосчёта нет сервера, базы данных и аналитики — закрыли вкладку, данных нет.</p>
+      </details>
+      <details>
+        <summary>Какие банки поддерживаются?</summary>
+        <p>Любой банк, который отдаёт выписку в CSV: Т-Банк, Сбер, Альфа и другие. Формат определяется автоматически. Если файла нет — можно вставить операции текстом.</p>
+      </details>
+      <details>
+        <summary>Это заменяет приложение «Мой налог»?</summary>
+        <p>Нет. Чеки выдаёт и налог начисляет только «Мой налог». Самосчёт помогает заранее знать сумму, не пропустить незадекларированный доход и не заплатить лишнего с личных переводов.</p>
+      </details>
+      <details>
+        <summary>Точно ли считается налог?</summary>
+        <p>Считаем по действующим правилам НПД: 4% с доходов от физлиц, 6% от юрлиц, вычет 10 000 ₽ (ставки 3% и 4% до исчерпания), лимит 2,4 млн ₽/год. Итоговая сумма к уплате всегда — в «Мой налог»; Самосчёт — предварительный расчёт и контроль.</p>
+      </details>
+      <details>
+        <summary>Что за ИИ и зачем ему ключ?</summary>
+        <p>Спорные операции (например «Перевод СБП») можно доразметить нейросетью Claude. Запрос уходит напрямую с вашей страницы в Anthropic по вашему API-ключу — мы не видим ни ключ, ни данные. Это опционально: правила размечают большинство операций и без ИИ.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Самосчёт · ИИ-бухгалтерия для самозанятых · <a href="mailto:ilyabargmgmt@gmail.com">ilyabargmgmt@gmail.com</a><br>
+    Сервис выполняет предварительные расчёты и не является налоговой консультацией.
+  </div>
+</footer>
+</body>
+</html>
