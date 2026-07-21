@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://0xkayser.github.io/samoschet/sitemap.xml
+Sitemap: https://samoschet.online/sitemap.xml

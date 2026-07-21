@@ -7,7 +7,7 @@
 import os, html
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SITE = "https://0xkayser.github.io/samoschet"
+SITE = "https://samoschet.online"
 TODAY = "2026-07-20"
 
 CSS = """
@@ -77,19 +77,19 @@ def page(path, title, desc, h1, crumbs, body_html, related, jsonld=None):
 </head>
 <body>
 <header><div class="wrap">
-  <a class="logo" href="/samoschet/">Само<span>счёт</span></a>
-  <nav><a href="/samoschet/baza/">База знаний</a><a href="/samoschet/app.html">Инструмент</a></nav>
+  <a class="logo" href="/">Само<span>счёт</span></a>
+  <nav><a href="/baza/">База знаний</a><a href="/app.html">Инструмент</a></nav>
 </div></header>
 <div class="wrap">
-<div class="crumbs"><a href="/samoschet/">Самосчёт</a> → <a href="/samoschet/baza/">База знаний</a> → {html.escape(crumbs)}</div>
+<div class="crumbs"><a href="/">Самосчёт</a> → <a href="/baza/">База знаний</a> → {html.escape(crumbs)}</div>
 <h1>{html.escape(h1)}</h1>
 {body_html}
 <div class="cta"><b>Проверьте свою выписку за 30 секунд</b>
 <p>Бесплатный инструмент Самосчёт разберёт CSV-выписку из любого банка: отделит доход от личных переводов, посчитает налог НПД с вычетом и соберёт отчёт по месяцам. Без регистрации, данные не покидают браузер.</p>
-<a href="/samoschet/app.html">Открыть Самосчёт</a></div>
+<a href="/app.html">Открыть Самосчёт</a></div>
 {rel_html}
 </div>
-<footer><div class="wrap">Самосчёт · <a href="/samoschet/">ИИ-бухгалтерия для самозанятых</a> · Материал носит справочный характер и не является налоговой консультацией. Обновлено: {TODAY}.</div></footer>
+<footer><div class="wrap">Самосчёт · <a href="/">ИИ-бухгалтерия для самозанятых</a> · Материал носит справочный характер и не является налоговой консультацией. Обновлено: {TODAY}.</div></footer>
 </body>
 </html>"""
     d = os.path.join(ROOT, path)
@@ -217,7 +217,7 @@ def prof_pages():
         urls.append((page(f"npd/{slug}", title, desc,
                           f"Налог самозанятого для {gen_name}: сколько платить и как считать",
                           name.capitalize(), body, related_for("prof", slug), jsonld),
-                     f"Налог для {gen_name}", f"/samoschet/npd/{slug}/"))
+                     f"Налог для {gen_name}", f"/npd/{slug}/"))
     return urls
 
 # ------------------------------------------------------------------- amounts
@@ -250,7 +250,7 @@ def amount_pages():
         urls.append((page(f"nalog/{a}", title, desc,
                           f"Сколько налога заплатит самозанятый с {fmt(a)} ₽",
                           f"Налог с {fmt(a)} ₽", body, related_for("amount", a)),
-                     f"Налог с {fmt(a)} ₽", f"/samoschet/nalog/{a}/"))
+                     f"Налог с {fmt(a)} ₽", f"/nalog/{a}/"))
     return urls
 
 # ------------------------------------------------------------------ questions
@@ -310,7 +310,7 @@ def qa_pages():
         body = f"<p><b>Короткий ответ:</b> {html.escape(short)}</p><h2>Подробнее</h2>{body_extra}"
         title = q + " — разбор 2026"
         urls.append((page(f"vopros/{slug}", title, short[:158], q, "Вопрос", body, related_for("qa", slug), jsonld),
-                     q, f"/samoschet/vopros/{slug}/"))
+                     q, f"/vopros/{slug}/"))
     return urls
 
 # --------------------------------------------------------------------- banks
@@ -348,17 +348,17 @@ def bank_pages():
         urls.append((page(f"vypiska/{slug}", title, desc,
                           f"Выписка из {gen_name} в CSV: пошаговая инструкция",
                           name, body, related_for("bank", slug)),
-                     f"Выписка из {gen_name}", f"/samoschet/vypiska/{slug}/"))
+                     f"Выписка из {gen_name}", f"/vypiska/{slug}/"))
     return urls
 
 # ------------------------------------------------------------ related linking
 def related_for(kind, key):
     """5 связанных ссылок: детерминированная ротация по хэшу ключа."""
     pool = []
-    pool += [(f"Налог для {p[2]}", f"/samoschet/npd/{p[0]}/") for p in PROF]
-    pool += [(f"Налог с {fmt(a)} ₽", f"/samoschet/nalog/{a}/") for a in AMOUNTS]
-    pool += [(q[1], f"/samoschet/vopros/{q[0]}/") for q in QA]
-    pool += [(f"Выписка из {b[1]}", f"/samoschet/vypiska/{b[0]}/") for b in BANKS]
+    pool += [(f"Налог для {p[2]}", f"/npd/{p[0]}/") for p in PROF]
+    pool += [(f"Налог с {fmt(a)} ₽", f"/nalog/{a}/") for a in AMOUNTS]
+    pool += [(q[1], f"/vopros/{q[0]}/") for q in QA]
+    pool += [(f"Выписка из {b[1]}", f"/vypiska/{b[0]}/") for b in BANKS]
     h = abs(hash(f"{kind}:{key}")) % len(pool)
     picked, i = [], h
     self_frag = f"/{key}/" if not isinstance(key, int) else f"/{key}/"
