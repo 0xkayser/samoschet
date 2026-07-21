@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://samoschet.online/sitemap.xml
+# LLM hint file: https://samoschet.online/llms.txt

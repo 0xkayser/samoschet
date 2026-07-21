@@ -189,7 +189,7 @@ footer a:hover{color:var(--red)}
           <li>Сверка чеков в «Мой налог»</li>
           <li>Ответы на вопросы по НПД в чате</li>
         </ul>
-        <a class="btn" href="mailto:ilyabargmgmt@gmail.com?subject=Самосчёт: тариф Под ключ">Написать</a>
+        <a class="btn" href="#zayavka" data-plan="Под ключ — 1 990 ₽/мес">Оставить заявку</a>
       </div>
       <div class="price">
         <h3>Разовый разбор</h3>
@@ -201,9 +201,40 @@ footer a:hover{color:var(--red)}
           <li>Сверка с «Мой налог»</li>
           <li>Рекомендации на следующий год</li>
         </ul>
-        <a class="tlink" href="mailto:ilyabargmgmt@gmail.com?subject=Самосчёт: разовый разбор">Заказать разбор</a>
+        <a class="tlink" href="#zayavka" data-plan="Разовый разбор — 2 990 ₽">Заказать разбор</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec" id="zayavka">
+  <div class="wrap">
+    <h2>Оставить заявку</h2>
+    <p class="lead">Опишите задачу — отвечу в течение дня. Или просто напишите на <a class="tlink" href="mailto:ilyabargmgmt@gmail.com">почту</a>.</p>
+    <form id="leadForm" style="max-width:560px">
+      <div style="display:grid;gap:14px">
+        <label style="display:grid;gap:6px;font-size:13.5px;color:#4a4437">Как вас зовут
+          <input name="name" required style="background:#fdfbf5;border:1px solid var(--line2);padding:11px 13px;font-size:15px;color:var(--ink)">
+        </label>
+        <label style="display:grid;gap:6px;font-size:13.5px;color:#4a4437">Телеграм, почта или телефон — куда ответить
+          <input name="contact" required style="background:#fdfbf5;border:1px solid var(--line2);padding:11px 13px;font-size:15px;color:var(--ink)">
+        </label>
+        <label style="display:grid;gap:6px;font-size:13.5px;color:#4a4437">Что нужно
+          <select name="plan" id="planSelect" style="background:#fdfbf5;border:1px solid var(--line2);padding:11px 13px;font-size:15px;color:var(--ink)">
+            <option>Под ключ — 1 990 ₽/мес</option>
+            <option>Разовый разбор — 2 990 ₽</option>
+            <option>Вопрос / другое</option>
+          </select>
+        </label>
+        <label style="display:grid;gap:6px;font-size:13.5px;color:#4a4437">Пара слов о задаче (не обязательно)
+          <textarea name="message" rows="3" style="background:#fdfbf5;border:1px solid var(--line2);padding:11px 13px;font-size:15px;color:var(--ink);font-family:inherit;display:block;min-height:80px"></textarea>
+        </label>
+        <div>
+          <button type="submit" class="btn" style="font-family:inherit;cursor:pointer">Отправить заявку</button>
+          <span id="leadStatus" style="margin-left:14px;font-size:14px;color:var(--green)"></span>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -241,5 +272,29 @@ footer a:hover{color:var(--red)}
     Сервис выполняет предварительные расчёты и не является налоговой консультацией.
   </div>
 </footer>
+<script>
+document.querySelectorAll('a[data-plan]').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('planSelect').value = a.dataset.plan;
+}));
+document.getElementById('leadForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const f=e.target, st=document.getElementById('leadStatus'), btn=f.querySelector('button');
+  btn.disabled=true; st.style.color='var(--muted)'; st.textContent='Отправляю…';
+  const data=Object.fromEntries(new FormData(f).entries());
+  try{
+    const r=await fetch('https://formsubmit.co/ajax/ilyabargmgmt@gmail.com',{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({...data,_subject:'Заявка Самосчёт: '+data.plan,_template:'table'})
+    });
+    if(!r.ok) throw new Error();
+    st.style.color='var(--green)'; st.textContent='Заявка отправлена. Отвечу в течение дня!';
+    f.reset();
+  }catch(err){
+    st.style.color='var(--red)';
+    st.innerHTML='Не отправилось — напишите на <a href="mailto:ilyabargmgmt@gmail.com">почту</a>.';
+  }
+  btn.disabled=false;
+});
+</script>
 </body>
 </html>

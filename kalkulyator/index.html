@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор налога самозанятого 2026 — онлайн, с вычетом</title>
+<meta name="description" content="Бесплатный калькулятор НПД: введите доход — получите налог 4% или 6% с учётом вычета 10 000 ₽ и сумму на руки. Без регистрации.">
+<link rel="canonical" href="https://samoschet.online/kalkulyator/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Самосчёт">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Калькулятор налога самозанятого 2026 — онлайн, с вычетом">
+<meta property="og:description" content="Введите доход — получите налог НПД 4%/6% с учётом вычета 10 000 ₽ и сумму на руки.">
+<meta property="og:url" content="https://samoschet.online/kalkulyator/">
+<meta property="og:image" content="https://samoschet.online/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Калькулятор налога самозанятого","url":"https://samoschet.online/kalkulyator/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Самосчёт","item":"https://samoschet.online/"},{"@type":"ListItem","position":2,"name":"Калькулятор налога","item":"https://samoschet.online/kalkulyator/"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f6f2e9;--ink:#211e18;--muted:#6f675a;--line:#d8d0bf;--line2:#c3b99f;--red:#b23a1a;--red2:#8f2e14;--green:#2f6b40}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
+.wrap{max-width:740px;margin:0 auto;padding:0 22px}
+header{padding:13px 0;border-bottom:1px solid var(--ink);margin-bottom:26px}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;max-width:960px}
+.logo{font-family:"PT Serif",Georgia,serif;font-weight:700;font-size:20px;color:var(--ink);text-decoration:none}
+.logo span{color:var(--red)}
+nav a{color:var(--muted);text-decoration:none;font-size:13px;margin-left:18px}
+nav a:hover{color:var(--red)}
+h1{font-family:"PT Serif",Georgia,serif;font-size:clamp(26px,4.2vw,34px);line-height:1.2;margin-bottom:16px;letter-spacing:-.01em}
+h2{font-family:"PT Serif",Georgia,serif;font-size:21px;margin:30px 0 10px}
+p{margin-bottom:13px;color:#3d382f}
+.calc{border:1px solid var(--ink);background:#fdfbf5;padding:24px;margin:24px 0}
+.calc label{display:grid;gap:6px;font-size:13.5px;color:#4a4437;margin-bottom:16px}
+.calc input[type=number]{background:var(--paper);border:1px solid var(--line2);padding:12px 14px;font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums;max-width:280px}
+.seg{display:flex;gap:0;border:1px solid var(--ink);width:fit-content}
+.seg button{background:transparent;border:0;padding:10px 18px;font-size:14px;cursor:pointer;color:var(--ink);font-family:inherit}
+.seg button.on{background:var(--red);color:var(--paper);font-weight:600}
+.seg button + button{border-left:1px solid var(--ink)}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;color:#4a4437;cursor:pointer;margin-bottom:18px}
+.chk input{accent-color:var(--red);width:15px;height:15px}
+.res{border-top:1px solid var(--ink);padding-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+.res .lbl{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.res .val{font-family:"PT Serif",Georgia,serif;font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
+.res .val.tax{color:var(--red)}
+.res .val.net{color:var(--green)}
+.res .sub2{font-size:12.5px;color:var(--muted);margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:16px 0}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left}
+tr:first-child th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--ink)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.cta{border:1px solid var(--ink);background:#fdfbf5;padding:20px 22px;margin:30px 0}
+.cta b{font-family:"PT Serif",Georgia,serif;font-size:16.5px}
+.cta p{font-size:14px;color:var(--muted);margin:7px 0 14px}
+.cta a{display:inline-block;background:var(--red);color:var(--paper);text-decoration:none;font-weight:600;padding:10px 20px;font-size:14px;border:1px solid var(--red2);box-shadow:2px 2px 0 var(--ink)}
+details{border-bottom:1px solid var(--line);padding:13px 0}
+details:first-of-type{border-top:1px solid var(--ink)}
+summary{cursor:pointer;font-weight:600;font-size:14.5px}
+details p{font-size:14px;margin-top:8px}
+footer{border-top:1px solid var(--ink);margin-top:46px;padding:20px 0 36px;color:var(--muted);font-size:12.5px}
+footer a{color:var(--ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">Само<span>счёт</span></a>
+  <nav><a href="/baza/">База знаний</a><a href="/app.html">Разбор выписки</a></nav>
+</div></header>
+<div class="wrap">
+<h1>Калькулятор налога самозанятого</h1>
+<p>Введите доход — калькулятор посчитает налог на профессиональный доход по ставкам 2026 года: 4% с оплат от физлиц, 6% от юрлиц и ИП, с учётом налогового вычета 10 000 ₽.</p>
+
+<div class="calc">
+  <label>Доход, ₽
+    <input type="number" id="amount" value="50000" min="0" step="1000" inputmode="numeric">
+  </label>
+  <label>Кто вам платил</label>
+  <div class="seg" style="margin-bottom:18px">
+    <button id="bFiz" class="on">Физлица · 4%</button>
+    <button id="bJur">Юрлица и ИП · 6%</button>
+  </div>
+  <label class="chk"><input type="checkbox" id="ded"> Налоговый вычет 10 000 ₽ ещё не израсходован</label>
+  <div class="res">
+    <div><div class="lbl">Налог НПД</div><div class="val tax" id="rTax">2 000 ₽</div><div class="sub2" id="rRate">ставка 4%</div></div>
+    <div><div class="lbl">На руках</div><div class="val net" id="rNet">48 000 ₽</div><div class="sub2" id="rDed"></div></div>
+  </div>
+</div>
+
+<h2>Как считается налог</h2>
+<p>Ставка зависит от плательщика: <b>4%</b> — если платило физлицо, <b>6%</b> — если компания или ИП. Пока не израсходован разовый вычет 10 000 ₽, ставки автоматически снижены до <b>3%</b> и <b>4%</b> — вычет «съедает» разницу, отдельно оформлять его не нужно.</p>
+<p>Налог начисляется в приложении «Мой налог» до 12-го числа следующего месяца, оплатить нужно до 28-го. Деклараций и обязательных взносов нет. Годовой лимит дохода на НПД — 2 400 000 ₽.</p>
+
+<h2>Примеры</h2>
+<table>
+<tr><th>Доход</th><th class="num">От физлиц (4%)</th><th class="num">От юрлиц (6%)</th></tr>
+<tr><td>30 000 ₽</td><td class="num">1 200 ₽</td><td class="num">1 800 ₽</td></tr>
+<tr><td>50 000 ₽</td><td class="num">2 000 ₽</td><td class="num">3 000 ₽</td></tr>
+<tr><td>100 000 ₽</td><td class="num">4 000 ₽</td><td class="num">6 000 ₽</td></tr>
+<tr><td>200 000 ₽</td><td class="num">8 000 ₽</td><td class="num">12 000 ₽</td></tr>
+</table>
+
+<div class="cta"><b>Налог за месяц — по реальной выписке</b>
+<p>Калькулятор хорош для одной суммы. А если оплат за месяц десятки — загрузите CSV-выписку из банка: Самосчёт сам отделит доход от личных переводов и посчитает налог по каждому месяцу. Бесплатно, данные не покидают браузер.</p>
+<a href="/app.html">Разобрать выписку</a></div>
+
+<h2>Частые вопросы</h2>
+<details><summary>Налог считается с суммы «на руки» или со всей оплаты?</summary><p>Со всей суммы, которую заплатил клиент. Комиссии банка, бирж и агрегаторов не вычитаются.</p></details>
+<details><summary>Что если платили и физлица, и юрлица?</summary><p>Каждая оплата облагается по своей ставке отдельно. Посчитайте два потока по отдельности или загрузите выписку в Самосчёт — он разделит сам.</p></details>
+<details><summary>Как узнать, сколько вычета осталось?</summary><p>В приложении «Мой налог» на главном экране: блок «Налоговый вычет». Если вычет ещё есть, ставки в этом калькуляторе включаются галочкой.</p></details>
+
+</div>
+<footer><div class="wrap">Самосчёт · <a href="/">ИИ-бухгалтерия для самозанятых</a> · <a href="/baza/">База знаний</a> · Предварительный расчёт, не налоговая консультация.</div></footer>
+<script>
+let payer='fiz';
+const amount=document.getElementById('amount'), ded=document.getElementById('ded');
+const bF=document.getElementById('bFiz'), bJ=document.getElementById('bJur');
+function fmt(n){return n.toLocaleString('ru-RU',{maximumFractionDigits:2})+' ₽';}
+function calc(){
+  const a=Math.max(0,+amount.value||0);
+  const base=payer==='fiz'?0.04:0.06;
+  const rate=ded.checked?(payer==='fiz'?0.03:0.04):base;
+  const tax=a*rate;
+  document.getElementById('rTax').textContent=fmt(tax);
+  document.getElementById('rNet').textContent=fmt(a-tax);
+  document.getElementById('rRate').textContent='ставка '+(rate*100).toFixed(0)+'%'+(ded.checked?' (с вычетом)':'');
+  document.getElementById('rDed').textContent=ded.checked?'вычет экономит '+fmt(a*(base-rate)):'';
+}
+bF.onclick=()=>{payer='fiz';bF.classList.add('on');bJ.classList.remove('on');calc();};
+bJ.onclick=()=>{payer='jur';bJ.classList.add('on');bF.classList.remove('on');calc();};
+amount.oninput=calc; ded.onchange=calc; calc();
+</script>
+</body>
+</html>
