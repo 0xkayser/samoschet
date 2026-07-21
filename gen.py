@@ -62,6 +62,12 @@ def page(path, title, desc, h1, crumbs, body_html, related, jsonld=None):
         items = "".join(f'<li><a href="{u}">{html.escape(t)}</a></li>' for t, u in related)
         rel_html = f'<div class="rel"><b>Читайте также</b><ul>{items}</ul></div>'
     ld = f'<script type="application/ld+json">{jsonld}</script>' if jsonld else ""
+    bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Самосчёт","item":"https://samoschet.online/"},
+        {"@type":"ListItem","position":2,"name":"База знаний","item":"https://samoschet.online/baza/"},
+        {"@type":"ListItem","position":3,"name":crumbs,"item":canon}]}
+    import json as _j
+    ld += f'<script type="application/ld+json">{_j.dumps(bc, ensure_ascii=False)}</script>'
     doc = f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -70,6 +76,15 @@ def page(path, title, desc, h1, crumbs, body_html, related, jsonld=None):
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{canon}">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Самосчёт">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="{html.escape(title)}">
+<meta property="og:description" content="{html.escape(desc)}">
+<meta property="og:url" content="{canon}">
+<meta property="og:image" content="https://samoschet.online/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
