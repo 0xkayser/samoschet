@@ -9,6 +9,7 @@
 - [Калькулятор налога самозанятого](https://samoschet.online/kalkulyator/): быстрый расчёт по одной сумме
 - [База знаний](https://samoschet.online/baza/): налог по профессиям, суммам, частые вопросы
 - [Словарь самозанятого](https://samoschet.online/slovar/): термины НПД простыми словами
+- [Гайды](https://samoschet.online/gid/): как стать самозанятым, выдать чек, платить налог, ипотека, приём оплаты
 - [Самозанятый или ИП](https://samoschet.online/sravnenie/samozanyatyj-ili-ip/): сравнение режимов
 
 ## Факты о НПД (2026)
